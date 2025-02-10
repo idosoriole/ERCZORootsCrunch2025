@@ -1,0 +1,402 @@
+TITLE
+Ivan - 1-D model, Rock profile: 47NoDol_FixO2s and initial cond: LastBatch_CO2_17E-3, SSA proportions from batch fitting
+END
+
+
+RUNTIME
+time_units         years
+timestep_max       1
+timestep_init      1.E-09
+time_tolerance     0.01
+hindmarsh          true
+correction_max     2.0
+debye-huckel       true
+database_sweep     false
+speciate_only      false
+graphics           kaleidagraph
+solver             gmres
+preconditioner     ilu
+precondition_level 1
+master_variable    H+
+database             DBS_NoEa.dbs
+gimrt              true
+screen_output      50
+read_SaturationFile       Sat_1R40.txt
+END
+
+OUTPUT
+time_units           years
+spatial_profile        50
+time_series           BK_Tp_dum-AqKin1.0E+07-dum-Flow3.5E+00-LastBatch_CO2_17E-3-Sat_1R40.out  1 1 1
+time_series           BK_Md_dum-AqKin1.0E+07-dum-Flow3.5E+00-LastBatch_CO2_17E-3-Sat_1R40.out  50 1 1
+time_series           BK_Bt_dum-AqKin1.0E+07-dum-Flow3.5E+00-LastBatch_CO2_17E-3-Sat_1R40.out  100 1 1
+time_series_print     Na+ K+ Al+++ Mg++ SiO2(aq) Ca++ Fe++ SO4-- pH CO2(aq) O2(aq)
+time_series_interval 1
+END
+
+TRANSPORT
+distance_units           centimeter
+time_units               second
+fix_diffusion            1E-04
+dispersion               1.0E-04
+gas_diffusion            5e-2
+END
+
+BOUNDARY_CONDITIONS
+x_begin     RW       dirichlet
+x_end     down_limit       flux
+END
+
+INITIAL_CONDITIONS
+top       1-11 1-1 1-1
+roots       12-45 1-1 1-1
+middle       46-69 1-1 1-1
+bottom       70-99 1-1 1-1
+down_limit       100-100 1-1 1-1
+END
+
+AQUEOUS_KINETICS
+CH2O_decomp -rate 10000000.0
+FeII_oxidation_acid
+END
+
+Condition   RW   
+units            mol/kg
+temperature    11.6 
+pH    5.8 
+Li+    1.000E-04 
+CH2O    5.33E-04 
+Na+    3.950E-06 
+K+    5.080E-06 
+Fe++    4.000E-08 
+Fe+++    1.000E-05 
+O2(aq)    O2(g) 0.21 
+CO2(aq)    CO2(g) 0.017 
+Methane(aq)    CH4(g) 1.9E-4 
+HS-    1.000E-14 
+SO4--    1.000E-14 
+Mg++    2.100E-07 
+Al+++    5.970E-07 
+Ca++    8.080E-07 
+SiO2(aq)    3.430E-07 
+Cl-    1.000E-14 
+XEel- 0.0
+SolidDensity     CalculateFromMinerals
+Tracer            0.0000
+END
+
+Condition   top   
+units            mol/kg
+temperature    11.6 
+pH    5.97 
+Li+    1.00E-14 
+CH2O    5.33E-04 
+Na+    2.89E-05 
+K+    7.25E-05 
+Fe++    8.79E-07 
+Fe+++    1.00E-09 
+O2(aq)    O2(g) 0.21 
+CO2(aq)    CO2(g) 0.017 
+Methane(aq)    CH4(g) 1.9E-4 
+HS-    1.00E-14 
+SO4--    5.28E-09 
+Mg++    6.81E-06 
+Al+++    3.48E-09 
+Ca++    1.21E-05 
+SiO2(aq)    4.32E-05 
+Cl-    1.00E-07 
+!Condition_minerals
+Quartz                       0.234 bulk_surface_area 7.065E+01
+Albite                       0.11 bulk_surface_area 2.935E+01
+Dolomite-dis                       0.001 bulk_surface_area 2.577E-03
+Chamosite-7A                       0.115 bulk_surface_area 2.565E+01
+Kaolinite                       0.078 specific_surface_area 1.650E-05
+Smectite-high-Fe-Mg                       0.129 specific_surface_area 5.250E-05
+Microcline                       0.003 bulk_surface_area 2.672E-01
+Muscovite                       0.009 bulk_surface_area 8.866E-01
+Fe(OH)3                       0.061 specific_surface_area 2.100E-06
+Illite                       0.059 specific_surface_area 3.330E-05
+Pyrite                       0.0 bulk_surface_area 0.000E+00
+POMC                       0.001 bulk_surface_area 4.500E-02
+O2(s)                       1e-08 bulk_surface_area 8.101E-08
+Gibbsite                       1e-08 specific_surface_area 3.000E-13
+Calcite                       1e-08 specific_surface_area 3.000E-07
+SiO2(am)                       0.1 specific_surface_area 3.000E-03
+XEel-                        -cec    2e-5
+SolidDensity     CalculateFromMinerals
+Tracer            0.001
+END
+
+Condition   roots   
+units            mol/kg
+temperature    11.6 
+pH    5.65 
+Li+    1.00E-14 
+CH2O    5.33E-04 
+Na+    3.24E-05 
+K+    1.22E-04 
+Fe++    8.83E-07 
+Fe+++    2.86E-09 
+O2(aq)    O2(g) 0.21 
+CO2(aq)    CO2(g) 0.017 
+Methane(aq)    CH4(g) 1.9E-4 
+HS-    1.00E-14 
+SO4--    6.98E-09 
+Mg++    8.77E-06 
+Al+++    1.16E-08 
+Ca++    9.45E-06 
+SiO2(aq)    4.39E-05 
+Cl-    1.00E-07 
+!Condition_minerals
+Quartz                       0.181 bulk_surface_area 5.464E+01
+Albite                       0.159 bulk_surface_area 4.242E+01
+Dolomite-dis                       0.001 bulk_surface_area 2.577E-03
+Chamosite-7A                       0.104 bulk_surface_area 2.319E+01
+Kaolinite                       0.068 specific_surface_area 1.500E-05
+Smectite-high-Fe-Mg                       0.081 specific_surface_area 5.250E-05
+Microcline                       0.004 bulk_surface_area 3.686E-01
+Muscovite                       0.012 bulk_surface_area 1.182E+00
+Fe(OH)3                       0.069 specific_surface_area 2.100E-06
+Illite                       0.06 specific_surface_area 3.330E-05
+Pyrite                       0.0 bulk_surface_area 0.000E+00
+POMC                       0.06 bulk_surface_area 2.700E+00
+O2(s)                       1e-08 bulk_surface_area 8.101E-08
+Gibbsite                       1e-08 specific_surface_area 3.000E-13
+Calcite                       1e-08 specific_surface_area 3.000E-07
+SiO2(am)                       0.1 specific_surface_area 2.700E-03
+XEel-                        -cec    5e-8
+SolidDensity     CalculateFromMinerals
+Tracer            0.001
+END
+
+Condition   middle   
+units            mol/kg
+temperature    11.6 
+pH    5.65 
+Li+    1.00E-14 
+CH2O    5.33E-04 
+Na+    3.24E-05 
+K+    1.22E-04 
+Fe++    8.83E-07 
+Fe+++    2.86E-09 
+O2(aq)    O2(g) 0.21 
+CO2(aq)    CO2(g) 0.017 
+Methane(aq)    CH4(g) 1.9E-4 
+HS-    1.00E-14 
+SO4--    6.98E-09 
+Mg++    8.77E-06 
+Al+++    1.16E-08 
+Ca++    9.45E-06 
+SiO2(aq)    4.39E-05 
+Cl-    1.00E-07 
+!Condition_minerals
+Quartz                       0.196 bulk_surface_area 5.917E+01
+Albite                       0.171 bulk_surface_area 4.562E+01
+Dolomite-dis                       0.001 bulk_surface_area 2.577E-03
+Chamosite-7A                       0.112 bulk_surface_area 2.498E+01
+Kaolinite                       0.074 specific_surface_area 1.500E-05
+Smectite-high-Fe-Mg                       0.088 specific_surface_area 5.250E-05
+Microcline                       0.004 bulk_surface_area 3.686E-01
+Muscovite                       0.013 bulk_surface_area 1.281E+00
+Fe(OH)3                       0.075 specific_surface_area 2.100E-06
+Illite                       0.065 specific_surface_area 3.330E-05
+Pyrite                       0.0 bulk_surface_area 0.000E+00
+POMC                       0.001 bulk_surface_area 4.500E-02
+O2(s)                       1e-08 bulk_surface_area 8.101E-07
+Gibbsite                       1e-08 specific_surface_area 3.000E-13
+Calcite                       1e-08 specific_surface_area 3.000E-07
+SiO2(am)                       0.1 specific_surface_area 3.600E-03
+XEel-                        -cec    8E-6
+SolidDensity     CalculateFromMinerals
+Tracer            0.001
+END
+
+
+Condition   bottom   
+units            mol/kg
+temperature    11.6 
+pH    7.12 
+Li+    1.00E-14 
+CH2O    5.33E-04 
+Na+    1.59E-05 
+K+    2.08E-05 
+Fe++    9.21E-07 
+Fe+++    7.98E-16 
+O2(aq)    O2(g) 0.21 
+CO2(aq)    CO2(g) 0.017 
+Methane(aq)    CH4(g) 1.9E-4 
+HS-    1.00E-14 
+SO4--    1.35E-06 
+Mg++    4.92E-05 
+Al+++    1.54E-12 
+Ca++    1.25E-04 
+SiO2(aq)    3.87E-05 
+Cl-    1.00E-07 
+!Condition_minerals
+Quartz                       0.21 bulk_surface_area 6.340E+01
+Albite                       0.188 bulk_surface_area 8.114E+00
+Dolomite-dis                       0.001 bulk_surface_area 1.718E-03
+Chamosite-7A                       0.128 bulk_surface_area 2.855E+01
+Kaolinite                       0.03 specific_surface_area 1.650E-05
+Smectite-high-Fe-Mg                       0.098 specific_surface_area 5.250E-05
+Microcline                       0.005 bulk_surface_area 9.598E+00
+Muscovite                       0.009 bulk_surface_area 8.866E-01
+Fe(OH)3                       0.064 specific_surface_area 2.100E-06
+Illite                       0.061 specific_surface_area 3.330E-05
+Pyrite                       0.001 bulk_surface_area 1.506E-03
+POMC                       0.001 bulk_surface_area 4.500E-02
+O2(s)                       0.005 bulk_surface_area 4.051E-01
+Gibbsite                       1e-08 specific_surface_area 3.000E-13
+Calcite                       1e-08 specific_surface_area 3.000E-09
+SiO2(am)                       0.1 specific_surface_area 9.000E-04
+XEel-                        -cec    5e-6
+SolidDensity     CalculateFromMinerals
+Tracer            0.001
+END
+
+Condition   down_limit   
+units            mol/kg
+temperature    11.6 
+pH    7.12 
+Li+    1.00E-14 
+CH2O    5.33E-04 
+Na+    1.59E-05 
+K+    2.08E-05 
+Fe++    9.21E-07 
+Fe+++    7.98E-16 
+O2(aq)    O2(g) 0.21 
+CO2(aq)    CO2(g) 0.017 
+Methane(aq)    CH4(g) 1.9E-4 
+HS-    1.00E-14 
+SO4--    1.35E-06 
+Mg++    4.92E-05 
+Al+++    1.54E-12 
+Ca++    1.25E-04 
+SiO2(aq)    3.87E-05 
+Cl-    1.00E-07 
+!Condition_minerals
+Quartz                       0.21 bulk_surface_area 6.340E+01
+Albite                       0.188 bulk_surface_area 8.114E+00
+Dolomite-dis                       0.001 bulk_surface_area 1.718E-03
+Chamosite-7A                       0.128 bulk_surface_area 2.855E+01
+Kaolinite                       0.03 specific_surface_area 1.650E-05
+Smectite-high-Fe-Mg                       0.098 specific_surface_area 5.250E-05
+Microcline                       0.005 bulk_surface_area 9.598E+00
+Muscovite                       0.009 bulk_surface_area 8.866E-01
+Fe(OH)3                       0.064 specific_surface_area 2.100E-06
+Illite                       0.061 specific_surface_area 3.330E-05
+Pyrite                       0.001 bulk_surface_area 1.506E-03
+POMC                       0.001 bulk_surface_area 4.500E-02
+O2(s)                       0.005 bulk_surface_area 4.051E-01
+Gibbsite                       1e-08 specific_surface_area 3.000E-13
+Calcite                       1e-08 specific_surface_area 3.000E-09
+SiO2(am)                       0.1 specific_surface_area 9.000E-04
+XEel-                        -cec    5e-6
+SolidDensity     CalculateFromMinerals
+Tracer            0.001
+END
+
+!! Mineral rates acquired from Palandri and Kharaka 2004
+MINERALS
+Quartz               -label default -rate -13.4
+Albite               -label default -rate -11.82
+Albite                                -label pH         -rate  -4.2
+Dolomite-dis               -label default -rate -7.53
+Dolomite-dis               -label pH -rate -3.19
+Microcline               -label default -rate -12.41
+Microcline                            -label pH         -rate  -4.2
+Pyrite               -label default -rate -4.55
+Fe(OH)3               -label default -rate -7.94
+Muscovite               -label default -rate -13.55
+Chamosite-7A               -label default -rate -12.52
+Illite               -label default -rate -11.4
+Kaolinite               -label default -rate -13.18
+Smectite-high-Fe-Mg               -label default -rate -12.78
+SiO2(am)               -label default -rate -12.31
+Calcite               -label default -rate -5.81
+POMC               -label default -rate -11.0
+O2(s)               -label default -rate -9.0
+Gibbsite               -label default -rate -11.5
+END
+
+PRIMARY_SPECIES
+H+
+Li+
+Na+
+Ca++
+K+
+Al+++
+SiO2(aq)
+CO2(aq)
+O2(aq)
+Methane(aq)
+Fe++
+Fe+++
+HS-
+SO4--
+Mg++
+Cl-
+CH2O
+Tracer
+END
+
+SECONDARY_SPECIES
+HCO3-
+!Al(CH3COO)2+
+Al(OH)2+
+!Al(SO4)2-
+!Al2(OH)2++++
+!Al3(OH)4(5+)
+!AlCH3COO++
+AlO2-
+AlOH++
+!AlSO4+
+FeOH+
+FeOH++
+FeSO4(aq)
+FeSO4+
+!H2S(aq)
+!H2SO4(aq)
+!HSO4-
+!NaCl(aq)
+!NaOH(aq)
+!NaSO4-
+OH-
+!S—
+!FeS(aq)
+CO3--
+FeCO3(aq)
+FeCO3+
+FeHCO3+
+NaCO3-
+NaHCO3(aq)
+END
+
+GASES
+CO2(g)
+O2(g)
+CH4(g)
+END
+
+FLOW
+time_units       years
+distance_units   meters
+constant_flow    3.5
+END
+
+ION_EXCHANGE
+exchange   XEel-
+convention Gaines-Thomas
+END
+
+POROSITY
+mineral_update    true
+porosity_update   true
+END
+
+DISCRETIZATION
+distance_units   meters
+xzones           100  0.18
+yzones		 1	1.0
+zzones		 1	1.0
+END

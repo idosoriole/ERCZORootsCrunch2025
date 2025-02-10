@@ -1,0 +1,7 @@
+distance_units meters                                                                                                               
+time_units  hours                                                                                                                   
+fix_diffusion  0                                                                                                                    
+dispersivity   0                                                                                                                    
+gas_diffusion  0                                                                                                                    
+ 
+ 

@@ -1,0 +1,152 @@
+[GEOL-IVANO:55776] shmem: mmap: an error occurred while determining whether or not /var/folders/vd/7dktxzpx1znf5cxy_vwph1c00000gr/T//ompi.GEOL-IVANO.504/jf.0/952762368/sm_segment.GEOL-IVANO.504.38ca0000.0 could be created.
+Note: The following floating-point exceptions are signalling: IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG
+
+  Title of simulation: Ivan - 1-D model, Rock profile: 47NoDol_FixO2s and initial cond: LastBat
+
+
+  --> Running in GIMRT mode (global implicit reaction and transport) 
+
+  Extended Debye-Huckel activity model
+
+   ---> Using database: DBS_NoEa.dbs                                                                                        
+  Temperature parameters not found
+  Using defaults
+
+  Number of components:                         18
+
+  Number of secondary species:                  15
+
+  Number of gases:                               3
+
+  Number of kinetic minerals:                   16
+
+  No surface complexation block found
+
+     --> Calling database subroutine
+
+
+  Number of reactions:                             37
+  Number of complexes:                             15
+  Number of minerals:                              19
+  Number of gases:                                  3
+
+     --> Finished reading database
+
+  Current density module: temperature
+
+
+  ---> READING GEOCHEMICAL CONDITIONS  
+
+
+  ---> STARTING SPECIATION OF GEOCHEMICAL CONDITIONS  
+
+
+                SPECIATION OF 
+      INITIAL AND BOUNDARY CONDITIONS 
+           SUCCESSFULLY COMPLETED
+
+  Aqueous kinetics block found
+ multipliers for reaction CH2O_decomp                                                                                                                          add up to:    1.0000000000000000     
+ Using irreversible rate formulation for reaction: CH2O_decomp    
+ multipliers for reaction FeII_oxidation_acid                                                                                                                  add up to:    1.0000000000000000     
+ Using irreversible rate formulation for reaction: FeII_oxidation_
+  Retardation parameters not found
+  Assuming NO retardation (Kd = 0) 
+  No discretization in Z direction
+  Setting nz = 1
+
+
+   NZ =            1
+
+
+  Number of heterogeneities =            5
+
+
+  Running as an unsaturated problem
+
+  Boundary condition block found
+
+  X = 0 boundary condition found
+
+
+  X = NX boundary condition found
+
+  Output block found
+
+  Timestepping on--output files written
+   50.000000000000000     
+
+
+ Parameters for this run:
+
+ --> Porosity calculated from mineral volume fractions
+ ----> Porosity is updated due to mineral dissolution and precipitation reactions
+ --> Extended Debye-Huckel activity model used
+ --> Activity coefficients only computed
+     at beginning of time step 
+  Reading MODFLOW block
+  Reading flow block
+  Flow block found
+
+  Constant flow specified
+
+
+   Constant velocities have been specified
+
+   X Darcy velocity =    6.0000000000000000     
+   Y Darcy velocity =    0.0000000000000000     
+   Z Darcy velocity =    0.0000000000000000     
+
+
+
+
+  Transport block found
+
+
+   Using constant diffusion coefficient
+  Diffusion coefficient (m**2/yr) =       3.1536E-01
+
+
+  Longitudinal dispersivity (m) =     0.0000E+00
+  Transverse dispersivity (m) =       0.0000E+00
+
+
+         INITIALIZATION COMPLETED 
+          STARTING TIMESTEPPING 
+
+
+  ---> RUNNING IN:  GLOBAL IMPLICIT REACTION AND TRANSPORT (GIMRT) MODE
+
+
+  Grid cells in X direction (NX):          100
+  Grid cells in Y direction (NY):            1
+  Grid cells in Z direction (NZ):            1
+
+
+  Initial mass in system =    2.6361687815274575E-005
+
+ Time step #           50
+  Time (yrs) =  9.09530E+00  Delt (yrs) = 1.000E+00
+  Number of Newton iterations = 10
+  Maximum change in master variable =   4.92E-04   at grid pts   57    1    1
+
+  Adjusting time step to match output file
+  ---> New time step =  9.0470E-01
+
+
+   WRITING OUTPUT FILES
+  Time (yrs) =  5.000E+01
+  Time (yrs) =  1.000E+00
+   File number  =            1
+
+
+  Total Newton iterations =          717
+
+   *** RUN SUCCESSFULLY COMPLETED *** 
+
+
+
+ ====== Running time on this computer ======
+
+     hr:   0    min:   0    sec:   4
+

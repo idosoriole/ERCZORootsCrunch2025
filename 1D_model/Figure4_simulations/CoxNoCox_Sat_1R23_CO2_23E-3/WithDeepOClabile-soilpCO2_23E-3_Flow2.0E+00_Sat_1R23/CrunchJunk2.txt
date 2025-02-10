@@ -1,0 +1,7 @@
+distance_units           centimeter                                                                                                 
+time_units               second                                                                                                     
+fix_diffusion            1E-04                                                                                                      
+dispersion               1.0E-04                                                                                                    
+gas_diffusion            5e-2                                                                                                       
+
+
