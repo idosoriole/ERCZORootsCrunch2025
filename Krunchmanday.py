@@ -5,6 +5,9 @@ import matplotlib.colors as mcolors
 from colour import Color
 from matplotlib.ticker import FormatStrFormatter
 import matplotlib.dates as mdates
+from matplotlib.dates import DateFormatter, YearLocator
+from matplotlib.ticker import MaxNLocator
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 from numpy.polynomial.polynomial import Polynomial
 from scipy.optimize import curve_fit
 from scipy.optimize import least_squares
@@ -451,3 +454,75 @@ def process_flux_data(fluxes_df, pco2_levels=[1.2, 2, 4], watsat_levels=[15, 23,
         transformed_MUL[bc_pco2_level] = transformed_curves
 
     return mean_ci_curves, best_watsat_for_MUL, transformed_MUL, aux, polynomial_coefficients
+    
+def PlotScatterTimeSeries(ax, spe, plot_df):
+    
+    min_val = plot_df[f'{spe}_mM'].min()
+    max_val = plot_df[f'{spe}_mM'].max()
+    
+    # Plot the scatter plot
+    sns.scatterplot(
+        data=plot_df, 
+        x='Date', 
+        y='Depth_m_avg', 
+        hue=f'{spe}_mM', 
+        palette='viridis_r', 
+        ax=ax,
+        marker='o', 
+        s=50, 
+        alpha=0.9, 
+        legend=False,  # Disable the automatic legend to create the colorbar manually
+        hue_norm=(min_val, max_val)  # Set the colorbar range to the data range
+    )
+    
+    ax.set_ylabel('Depth [m]', rotation=0, labelpad=40, va='center')
+    ax.yaxis.set_major_locator(MaxNLocator(nbins=3))  # Adjust the number of y-ticks
+    
+    # Manually add a colorbar for each subplot
+    norm = plt.Normalize(min_val, max_val)
+    sm = plt.cm.ScalarMappable(cmap='viridis_r', norm=norm)
+    sm.set_array([])
+    cbar = ax.figure.colorbar(sm, ax=ax, pad=0.02)
+    cbar.set_label(f'{spe} [mM]')
+    
+    ax.set_ylim(16, 0)  # Set limits from 16 to 0
+    # Set specific y-axis tick values
+    specific_ticks = [2, 7, 12]
+    # Ensure these ticks are within the range of your y-axis data
+    specific_ticks = [tick for tick in specific_ticks if tick >= plot_df['Depth_m'].min() and tick <= plot_df['Depth_m'].max()]
+    ax.set_yticks(specific_ticks)
+
+def uniformize_cation_data():
+    cations = pd.read_csv('../HydroShare_repo/Cations_Master.csv')
+    ports_depth = pd.read_excel('../HydroShare_repo/depth_table.xlsx', sheet_name = 'Sheet1')
+    filtered_ports = ports_depth[ports_depth['Port'].str.contains('A|TDT', na=False)]
+    ports_depth = filtered_ports[['Port', 'Average depth of sampling below ground surface (accounting for topography, m)']]
+    ports_depth.columns = ['TDT', 'Depth']
+    variables = ['Ca_mM', 'Mg_mM', 'K_mM', 'Na_mM', 'Si_mM']
+	
+    aux_plot = cations.loc[cations.port_ID.str.contains('A|B')]
+    aux_plot = aux_plot.loc[aux_plot.Depth_m < 14]
+    aux_plot.loc[:,'port_ID'] = aux_plot.port_ID.str.replace('B', 'A')
+    
+    #-------------
+    aux_ports_depth = ports_depth.loc[ports_depth.TDT.str.contains('A')]
+    aux_ports_depth.loc[:,'TDT'] = aux_ports_depth.TDT.str.replace('A', 'port')
+    #-------------
+    aux_plot['Port_Number'] = aux_plot['port_ID'].str.extract(r'(\d+)').astype(int)# Extract the port number from aux_plot['ID']
+    aux_plot['Port_ID'] = 'port' + aux_plot['Port_Number'].astype(str)# Create a column to match with ports_depth['ID']
+        
+    aux_plot = aux_plot.merge(aux_ports_depth, left_on='Port_ID', right_on='TDT', how='left')# Merge with ports_depth to get the corresponding depth
+    aux_plot.rename(columns={'Depth': 'Depth_m_avg'}, inplace=True)# Rename the merged depth column to 'Depth_m_avg'
+    aux_plot.drop(columns=['Port_Number', 'Port_ID', 'TDT'], inplace=True)# Drop unnecessary columns
+    #-------------
+    aux_plot['Date'] = pd.to_datetime(aux_plot.Date, format='mixed')
+    aux_plot['year'] = aux_plot.Date.dt.year
+    aux_plot['month'] = aux_plot.Date.dt.month
+    aux_plot = aux_plot.loc[:,['port_ID', 'Depth_m', 'Depth_m_avg', 'Date', 'year', 'month']+variables]
+    aux_plot = aux_plot.loc[(aux_plot.year < 2020)]
+    aux_plot.loc[aux_plot['K_mM'] > 0.08, 'K_mM'] = 0.08
+    aux_plot.loc[aux_plot['Na_mM'] > 0.8, 'Na_mM'] = 0.8
+    aux_plot.loc[aux_plot['Si_mM'] > 0.5, 'Si_mM'] = 0.5
+    aux_plot.loc[aux_plot['Ca_mM'] > 1, 'Ca_mM'] = 1.0
+    aux_plot.loc[aux_plot['Mg_mM'] > 0.5, 'Mg_mM'] = 0.5
+    return aux_plot
