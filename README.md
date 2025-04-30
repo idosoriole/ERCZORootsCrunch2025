@@ -10,6 +10,7 @@ Directory that contains the input and selected output files for the 1D RTM simul
 
 ### ReadRTM.ipynb
 Jupyter notebook to treat the output files in the Batch_Experiments_Model and 1D_model directories and reproduce main computations reported in the manuscript. 
+Field data necessary to generate the figures in this notebook can be accessed in the following HydroShare repository: http://www.hydroshare.org/resource/7750a881a5c3445dadaebcb7018d98bc
 
 ### Krunchmanday.py
 Set of functions to process Crunchflow output files and manipulate data. Imported by ReadRTM.ipynb
